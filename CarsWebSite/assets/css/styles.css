@@ -378,6 +378,12 @@ video {
   color: var(--white-color);
 }
 
+.button__models{
+  background-color: var(--body-second-color);
+  color: var(--white-color);
+  margin-top: 4rem;
+}
+
 /*=============== ABOUT ===============*/
 .about{
   background-color: var(--body-second-color);
@@ -426,6 +432,10 @@ video {
 }
 
 /*=============== MODELS ===============*/
+.models{
+  text-align: center;
+}
+
 .models__container{
   grid-template-columns: 250px;
   justify-content: center;
