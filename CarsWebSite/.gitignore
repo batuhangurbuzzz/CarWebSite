@@ -264,4 +264,6 @@ poetry.toml
 pyrightconfig.json
 frontend/
 Modeller.txt
+Projede_Yapılacaklar.txt
+Projede_Yapılanlar.txt
 # End of https://www.toptal.com/developers/gitignore/api/django,python

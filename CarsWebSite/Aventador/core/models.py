@@ -1,11 +1,12 @@
 from django.db import models
 from django.utils import timezone
 from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
 
 # Create your models here.
 class ActiveManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(is_deleted = False)
+        return super().get_queryset().filter(deleted_at__isnull = True)
 
 
 class AbstractModel(models.Model):
@@ -17,6 +18,9 @@ class AbstractModel(models.Model):
     
     objects = models.Manager()
     active_objects = ActiveManager()
+    
+    class Meta:
+        abstract = True
     
     def soft_delete(self):
         self.deleted_at = timezone.now()
@@ -31,25 +35,7 @@ class AbstractModel(models.Model):
         self.soft_delete()
     
 
-class MenuModel(AbstractModel):
-    name = models.CharField(max_length=30, verbose_name="Menü Adı")
-    
-    description = models.CharField(max_length=45, verbose_name="Menü Açıklaması", null=True, blank=True, help_text="Opsiyonel olarak bulunmaktadır eğer ki bir açıklama girecekseniz lütfen 45 karakteri geçmeyiniz.")
-    
-    bannerImage = models.FileField(upload_to="images", verbose_name="Logo", blank=True, null=True, help_text="Logo varsa resmini yükleyiniz yoksa boş bırakabilirsiniz.")
-    
-    bannerText = models.CharField(max_length=50, verbose_name="Logo Yazı", blank=True, null=True, help_text="Firma adını logo yerine kullanabilirsiniz. (Örnek: KatmanKod)")
-    
-    slug = models.SlugField(null=False, db_index=True, unique=True, blank=True, verbose_name="URL", help_text="Girilen isime göre otomatik oluşturulacaktır. Değiştirmek isterseniz değişiklik yapabilirsiniz.")
-    
-    # page 
-    
-    class Meta:
-        verbose_name = "Menü Ayarı"
-        verbose_name_plural = "Menü Ayarları"
 
-    def __str__(self):
-        return f"{self.name}"
     
 class PageModel(AbstractModel):
     name = models.CharField(max_length=50, verbose_name="Sayfa Adı")
@@ -64,9 +50,6 @@ class PageModel(AbstractModel):
     
     isActive = models.BooleanField(default=False, verbose_name="Sayfayı Yayına Al", help_text="Sayfanın aktif ise tik koyunuz değilse ellemeyiniz.")
     
-    # pageType
-    
-    
     def __str__(self):
         return f"{self.name}"
     
@@ -74,8 +57,29 @@ class PageModel(AbstractModel):
         verbose_name = "Sayfa Ayarı"
         verbose_name_plural = "Sayfa Ayarları"
         
+class MenuModel(AbstractModel):
+    name = models.CharField(max_length=30, verbose_name="Menü Adı")
+    description = models.CharField(max_length=45, verbose_name="Menü Açıklaması", null=True, blank=True, help_text="Opsiyonel olarak bulunmaktadır eğer ki bir açıklama girecekseniz lütfen 45 karakteri geçmeyiniz.")
+    
+    bannerImage = models.FileField(upload_to="images", verbose_name="Logo", blank=True, null=True, help_text="Logo varsa resmini yükleyiniz yoksa boş bırakabilirsiniz.")
+    
+    bannerText = models.CharField(max_length=50, verbose_name="Logo Yazı", blank=True, null=True, help_text="Firma adını logo yerine kullanabilirsiniz. (Örnek: KatmanKod)")
+    
+    slug = models.SlugField(null=False, db_index=True, unique=True, blank=True, verbose_name="URL", help_text="Girilen isime göre otomatik oluşturulacaktır. Değiştirmek isterseniz değişiklik yapabilirsiniz.")
+    
+    page = models.OneToOneField(PageModel, on_delete=models.CASCADE, related_name="menuItem" ,verbose_name="Bağlı Olduğu Sayfa")
+    
+    class Meta:
+        verbose_name = "Menü Ayarı"
+        verbose_name_plural = "Menü Ayarları"
+
+    def __str__(self):
+        return f"{self.name}"
+        
 class PageTypeModel(AbstractModel):
     name = models.CharField(max_length=100, verbose_name="Sayfa Tipi Adı", help_text="Sayfa tipi adını giriniz. (Örnek: Blog sayfası için Blog yazabilirsiniz).")
+    
+    page = models.OneToOneField(PageModel, on_delete=models.CASCADE, related_name="pagetype_data",verbose_name="Bağlı Olduğu Sayfa")
     
     class Meta:
         verbose_name="Sayfa Tipi Ayarı"
@@ -94,6 +98,8 @@ class BlogModel(AbstractModel):
     description = models.CharField(max_length=160, verbose_name="SEO Açıklama", null=True, blank=True, help_text="SEO için META description alanı sayfanın google aramalarında gözükecek açıklama kısmı için kullanılır. Maksimum 160 karakter uzunlukta olabilir.")
     
     keywords = models.CharField(max_length=150, verbose_name="SEO Anahtar Kelime", null=True, blank=True, help_text="SEO için META keywords alanı, sayfanın google aramalarında ki anahtar kelimeleri için kullanılır. Maksimum 150 karakter uzunlukta olabilir.")
+    
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Yazar")
         
     
     
