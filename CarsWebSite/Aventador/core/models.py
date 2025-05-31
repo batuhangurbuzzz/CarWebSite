@@ -33,10 +33,7 @@ class AbstractModel(models.Model):
         
     def delete(self, *args, **kwargs):
         self.soft_delete()
-    
 
-
-    
 class PageModel(AbstractModel):
     name = models.CharField(max_length=50, verbose_name="Sayfa Adı")
     
