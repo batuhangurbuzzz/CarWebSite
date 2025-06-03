@@ -1,0 +1,95 @@
+{% extends "../../base.html" %}
+
+{% block content %}
+<!--begin::App Content Header-->
+            <div class="app-content-header">
+            <!--begin::Container-->
+            <div class="container-fluid">
+                <!--begin::Row-->
+                <div class="row">
+                <div class="col-sm-6"><h3 class="mb-0">Katman Panel</h3></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-end">
+                      <li class="breadcrumb-item active"><a href="#">Genel Ayarlar</a></li>
+                    </ol>
+                </div>
+                </div>
+                <!--end::Row-->
+            </div>
+            <!--end::Container-->
+            </div>
+            <!--end::App Content Header-->
+
+
+            <!--begin::App Content-->
+            <div class="app-content">
+            <!--begin::Container-->
+            <div class="container-fluid">
+                <a href="{% url 'generalSettingsCreate' %}" class="btn btn-success mb-2">Genel Ayar Ekle</a>
+                                <!-- /.card -->
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h3 class="card-title">Genel Ayarlar</h3>
+                  </div>
+                  
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                    
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Sıralama</th>
+                          <th>Genel Ayar Adı</th>
+                          <th>Logo Resmi</th>
+                          <th>Logo Yazı</th>
+                          <th>Adres</th>
+                          <th>Telefon</th>
+                          <th>Telefon 2</th>
+                          <th>Oluşturulma Tarihi</th>
+                          <th>Güncellenme Tarihi</th>
+                          <th>İşlemler</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for general in generals %}
+                            <tr class="align-middle">
+                                <td>{{ general.id }}</td>
+                                <td>{{ general.name }}</td>
+                                {% if not general.bannerImage %}
+                                  <td>-</td>
+                                {% else %}
+                                  <td>{{ general.bannerImage }}</td>
+                                {% endif %}
+                                {% if not general.bannerText %}
+                                  <td>-</td>
+                                {% else %}
+                                  <td>{{ general.bannerText }}</td>
+                                {% endif %}
+                                <td>{{ general.address }}</td>
+                                <td>{{ general.phone }}</td>
+                                <td>{{ general.phone2 }}</td>
+                                <td>{{ general.createdAt }}</td>
+                                <td>{{ general.updatedAt }}</td>
+                                <td>
+                                    <a href="{% url 'generalSettingsUpdate' general.id %}" class="btn btn-warning"> Güncelle </a>
+                                    <a href="{% url 'generalSettingsDelete' general.id %}" class="btn btn-danger"> Sil </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                       
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!--end::Container-->
+            </div>
+            <!--end::App Content-->
+
+{% endblock content %}
+
+
+
+

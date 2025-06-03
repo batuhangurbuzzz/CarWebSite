@@ -53,6 +53,53 @@ def deleteBlogView(request, id):
 
 # Blog Ayarları Bitiş
 
+# Genel Ayarlar Başlangıç
+
+def generalSettingsIndex(request):
+    generals = GeneralSettingsModel.active_objects.all()
+    
+    return render(request, "pages/GeneralSettingsTemp/index.html", {'generals':generals})
+
+def createGeneralSettingsView(request):
+    form = GeneralSettingsForm(request.POST or None)
+    
+    if request.method == 'POST':
+        form = GeneralSettingsForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('generalSettingsList')
+        else:
+            form = BlogForm()
+    return render(request, "pages/GeneralSettingsTemp/createGeneralSettings.html", {'form':form})
+
+def updateGeneralSettingsView(request, id):
+    general = get_object_or_404(GeneralSettingsModel, pk=id)
+    
+    if request.method == 'POST':
+        form = GeneralSettingsForm(request.POST, instance=general)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('generalSettingsList')
+    else:
+        form = GeneralSettingsForm(instance=general)
+            
+    context = {
+        'form':form,
+        'general':general
+    }
+    return render(request, "pages/GeneralSettingsTemp/updateGeneralSettings.html", context)
+
+def deleteGeneralSettingsView(request, id):
+    general = get_object_or_404(GeneralSettingsModel, pk=id)
+    
+    if request.method == 'POST':
+        general.delete()
+        return redirect('generalSettingsList')
+    return render(request, "pages/GeneralSettingsTemp/deleteGeneralSettings.html", {'general':general})
+
+# Genel Ayarlar Bitiş
 
 # Menü Ayarları Başlangıç
 def menuIndex(request):
@@ -196,3 +243,155 @@ def deletePageType(request, id):
     return render(request, "pages/PageTypeTemp/deletePageType.html", {"pageType":pageType})
 # Sayfa Tipi Ayarları Bitiş
 
+# Sosyal Medya Ayarları Başlangıç
+
+def socialMediaIndex(request):
+    socialMedias = SocialMediaModel.active_objects.all()
+    
+    return render(request, "pages/SocialMediaTemp/index.html", {'socialMedias':socialMedias})
+
+def createsocialMediaView(request):
+    form = SocialMediaForm(request.POST or None)
+    
+    if request.method == 'POST':
+        form = SocialMediaForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('socialMediaList')
+        else:
+            form = SocialMediaForm()
+    return render(request, "pages/SocialMediaTemp/createSocialMedia.html", {'form':form})
+
+def updatesocialMediaView(request, id):
+    socialMedia = get_object_or_404(SocialMediaModel, pk=id)
+    
+    if request.method == 'POST':
+        form = SocialMediaForm(request.POST, instance=socialMedia)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('socialMediaList')
+    else:
+        form = SocialMediaForm(instance=socialMedia)
+            
+    context = {
+        'form':form,
+        'socialMedia':socialMedia
+    }
+    return render(request, "pages/SocialMediaTemp/updateSocialMedia.html", context)
+
+def deletesocialMediaView(request, id):
+    socialMedia = get_object_or_404(SocialMediaModel, pk=id)
+    
+    if request.method == 'POST':
+        socialMedia.delete()
+        return redirect('socialMediaList')
+    return render(request, "pages/SocialMediaTemp/deleteSocialMedia.html",{'socialMedia':socialMedia})
+
+# Sosyal Medya Ayarları Bitiş
+
+# Slider Ayarları Başlangıç
+
+def sliderIndex(request):
+    sliders = SliderModel.active_objects.all()
+    
+    return render(request, "pages/SliderTemp/index.html", {'sliders':sliders})
+
+def createSliderView(request):
+    form = SliderForm(request.POST or None)
+    
+    if request.method == 'POST':
+        form = SliderForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('sliderList')
+        else:
+            form = SliderForm()
+    return render(request, "pages/SliderTemp/createSlider.html", {'form':form})
+
+def updateSliderView(request, id):
+    slider = get_object_or_404(SliderModel, pk=id)
+    
+    if request.method == 'POST':
+        form = SliderForm(request.POST, instance=slider)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('sliderList')
+    else:
+        form = SliderForm(instance=slider)
+            
+    context = {
+        'form':form,
+        'slider':slider
+    }
+    return render(request, "pages/SliderTemp/updateSlider.html", context)
+
+def deleteSliderView(request, id):
+    slider = get_object_or_404(SliderModel, pk=id)
+    
+    if request.method == 'POST':
+        slider.delete()
+        return redirect('sliderList')
+    return render(request, "pages/SliderTemp/deleteSlider.html",{'slider':slider})
+
+# Slider Ayarları Bitiş
+
+# Cars Başlangıç
+
+def carsIndex(request):
+    cars = CarsModel.active_objects.all()
+    
+    return render(request, "pages/CarsTemp/index.html", {'cars':cars})
+
+def createCarsView(request):
+    form = CarsForm(request.POST or None)
+    
+    if request.method == 'POST':
+        form = CarsForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('carsList')
+        else:
+            form = CarsForm()
+    return render(request, "pages/CarsTemp/create.html", {'form':form})
+
+def updateSliderView(request, id):
+    car = get_object_or_404(CarsModel, pk=id)
+    
+    if request.method == 'POST':
+        form = CarsForm(request.POST, instance=car)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('carsList')
+    else:
+        form = CarsForm(instance=car)
+            
+    context = {
+        'form':form,
+        'car':car
+    }
+    return render(request, "pages/CarsTemp/update.html", context)
+
+def deleteSliderView(request, id):
+    car = get_object_or_404(CarsModel, pk=id)
+    
+    if request.method == 'POST':
+        car.delete()
+        return redirect('carsList')
+    return render(request, "pages/CarsTemp/delete.html",{'car':car})
+
+# Cars Bitiş
+
+
+# Contact Başlangıç
+def contactIndex(request):
+    contacts = ContactModel.active_objects.all()
+    
+    return render(request, "pages/ContactTemp/index.html", {'cars':contacts})
+
+# Contact Bitiş

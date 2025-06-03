@@ -25,7 +25,7 @@
                         <a href="#" class="nav-link">
                             <i class="bi bi-pencil-square"></i>
                             <p>
-                                Blog Ayarları
+                                Bloglar
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -46,9 +46,32 @@
 
                     <li class="nav-item">
                         <a href="#" class="nav-link">
+                            <i class="bi bi-gear"></i>
+                            <p>
+                                Genel Ayarlar
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'generalSettingsList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'generalSettingsCreate' %}" class="nav-link">
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p>Ekle</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i class="bi bi-menu-down"></i>
                             <p>
-                                Menü Ayarları
+                                Menüler
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -71,7 +94,7 @@
                         <a href="#" class="nav-link">
                             <i class="bi bi-file-break"></i>
                             <p>
-                                Sayfa Ayarları
+                                Sayfalar
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -94,7 +117,7 @@
                         <a href="#" class="nav-link">
                             <i class="bi bi-filetype-html"></i>
                             <p>
-                                Sayfa Tipi Ayarları
+                                Sayfa Tipi
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -112,6 +135,53 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-strava"></i>
+                            <p>
+                                Sosyal Medyalar
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'socialMediaList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'socialMediaCreate' %}" class="nav-link">
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p>Ekle</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-card-image"></i>
+                            <p>
+                                Sliderlar
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'sliderList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'sliderCreate' %}" class="nav-link">
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p>Ekle</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
                 <!--end::Sidebar Menu-->
             </nav>

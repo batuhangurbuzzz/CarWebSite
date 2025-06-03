@@ -2,32 +2,52 @@ from django import forms
 from .models import *
 from ckeditor.widgets import CKEditorWidget
 
-class MenuForm(forms.ModelForm):
-    class Meta:
+class BaseMeta:
+    fields = '__all__'
+    exclude = ['createdAt','updatedAt','deleted_at',]
+
+class BaseForm(forms.ModelForm):
+    class Meta(BaseMeta):
+        pass
+
+
+class MenuForm(BaseForm):
+    class Meta(BaseForm.Meta):
         model = MenuModel
-        fields = '__all__'
-        exclude = ['createdAt','updatedAt','deleted_at',]
         
         
-class PageForm(forms.ModelForm):
+class PageForm(BaseForm):
     content = forms.CharField(widget=CKEditorWidget())
-    class Meta:
+    class Meta(BaseForm.Meta):
         model = PageModel
-        fields = '__all__'
-        exclude = ['createdAt','updatedAt','deleted_at',]
         
         
-class PageTypeForm(forms.ModelForm):
-    class Meta:
+class PageTypeForm(BaseForm):
+    class Meta(BaseForm.Meta):
         model = PageTypeModel
-        fields = '__all__'
-        exclude = ['createdAt','updatedAt','deleted_at',]
+
         
-        
-class BlogForm(forms.ModelForm):
+class BlogForm(BaseForm):
     content = forms.CharField(widget=CKEditorWidget())
-    class Meta:
+    class Meta(BaseForm.Meta):
         model = BlogModel
-        fields = '__all__'
-        exclude = ['createdAt','updatedAt','deleted_at',]
         
+class GeneralSettingsForm(BaseForm):
+    class Meta(BaseForm.Meta):
+        model = GeneralSettingsModel
+        
+class SocialMediaForm(BaseForm):
+    class Meta(BaseForm.Meta):
+        model = SocialMediaModel
+        
+class SliderForm(BaseForm):
+    class Meta(BaseForm.Meta):
+        model = SliderModel
+        
+class CarsForm(BaseForm):
+    class Meta(BaseForm.Meta):
+        model = CarsModel
+        
+class ContactForm(BaseForm):
+    class Meta(BaseForm.Meta):
+        model = ContactModel
