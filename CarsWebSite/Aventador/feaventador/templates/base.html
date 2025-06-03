@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+   <html lang="en">
+   {% include "partials/head.html" %}
+   <body>
+      <!--==================== HEADER ====================-->
+      {% include "partials/header.html" %}
+
+
+      <!--==================== MAIN ====================-->
+      <main class="main">
+         {% block contant %}
+         
+         
+         
+         {% endblock contant %}
+      </main>
+
+      <!--==================== FOOTER ====================-->
+      {% include "partials/footer.html" %}
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      {% include "partials/js.html" %}
+   </body>
+</html>

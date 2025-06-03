@@ -262,7 +262,7 @@ poetry.toml
 
 # LSP config files
 pyrightconfig.json
-frontend/
+frontendAventador/
 Modeller.txt
 Projede_Yapılacaklar.txt
 Projede_Yapılanlar.txt

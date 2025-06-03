@@ -6,9 +6,6 @@ def index(request):
 
 
 def contact(request):
-    pass
-
-def createCarsView(request):
     form = ContactForm(request.POST or None)
     
     if request.method == 'POST':
@@ -19,4 +16,5 @@ def createCarsView(request):
             return redirect('contact')
         else:
             form = ContactForm()
-    return render(request, "pages/CarsTemp/create.html", {'form':form})
+    return render(request, "pages/Contact/index.html", {'form':form})
+    
