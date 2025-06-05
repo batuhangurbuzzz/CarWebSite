@@ -1,0 +1,33 @@
+<!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="{% url 'index' %}" class="nav__logo">AVENTADOR</a>
+
+            <div class="nav__menu" id="nav-menu">
+               <ul class="nav__list">
+                  <li>
+                     <a href="{% url 'index' %}" class="nav__link">Home</a>
+                  </li>
+
+                  {% for menu in menus %}
+                     <li>
+                        <a href="{% url 'page_detail' slug=menu.page.slug %}" class="nav__link">{{menu.name}}</a>
+                     </li>
+                  
+                  
+                  {% endfor %}
+
+                  
+               </ul>
+               <!-- Close Button -->
+                <div class="nav__close" id="nav-close">
+                  <i class="ri-close-large-line"></i>
+                </div>
+            </div>
+
+            <!-- Toggle Button -->
+             <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+             </div>
+         </nav>
+      </header>

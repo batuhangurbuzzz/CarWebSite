@@ -1,27 +1,17 @@
-"""
-URL configuration for Aventador project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
 from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('katman-panel', views.index, name="index"),
+    path('', views.index, name="index"),
+    
+    # Cars Start
+    path('arac', views.carsIndex, name='carsList'),
+    path('arac/olustur', views.createCarsView, name='carsCreate'),
+    path('arac/guncelle/<int:id>', views.updateCarsView, name='carsUpdate'),
+    path('arac/sil/<int:id>', views.deleteCarsView, name='carsDelete'),
+    # Cars Finish
     
     # Blog Start
     path('blog', views.blogIndex, name='blogList'),
@@ -29,6 +19,11 @@ urlpatterns = [
     path('blog/guncelle/<int:id>', views.updateBlogView, name='blogUpdate'),
     path('blog/sil/<int:id>', views.deleteBlogView, name='blogDelete'),
     # Blog Finish
+    
+    # Contact Start
+    path('iletisim', views.contactIndex, name='contactList'),
+    path('iletisim/<int:id>', views.contactDetails, name='contactDetails'),
+    # Contact Finish
     
     # General Settings Start
     path('genel-ayarlar', views.blogIndex, name='generalSettingsList'),

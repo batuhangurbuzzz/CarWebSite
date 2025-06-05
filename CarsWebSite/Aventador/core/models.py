@@ -6,6 +6,8 @@ from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
 import os
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.urls import reverse
 
 # Create your models here.
 class ActiveManager(models.Manager):
@@ -46,17 +48,24 @@ class PageModel(AbstractModel):
     
     keywords = models.CharField(max_length=150, verbose_name="SEO Anahtar Kelime", null=True, blank=True, help_text="SEO için META keywords alanı, sayfanın google aramalarında ki anahtar kelimeleri için kullanılır. Maksimum 150 karakter uzunlukta olabilir.")
     
+    slug = models.SlugField(unique=True, db_index=True, verbose_name="URL", help_text="Sayfanın URL'sini oluşturmak için kullanılır. Benzersiz olması gerekir.", blank=True, null=True)
+    
     content = RichTextField(verbose_name="Sayfa İçeriği", help_text="Sayfa içeriğini HTML formatında girip kaydet tuşuna basınız. Düzenleme yapma kısmında yine aynı şekilde html formatında düzenleyip kaydet yapınız.")
     
     isActive = models.BooleanField(default=False, verbose_name="Sayfayı Yayına Al", help_text="Sayfanın aktif ise tik koyunuz değilse ellemeyiniz.")
+    
+    def get_absolute_url(self):
+        if self.slug:
+            return reverse("page_detail", kwargs={"slug": self.slug})
+        return "#"
+    
     
     def __str__(self):
         return f"{self.name}"
     
     class Meta:
-        verbose_name = "Sayfa Ayarı"
-        verbose_name_plural = "Sayfa Ayarları"
-        
+        verbose_name = "Sayfa"
+        verbose_name_plural = "Sayfalar"        
 class MenuModel(AbstractModel):
     name = models.CharField(max_length=30, verbose_name="Menü Adı")
     description = models.CharField(max_length=45, verbose_name="Menü Açıklaması", null=True, blank=True, help_text="Opsiyonel olarak bulunmaktadır eğer ki bir açıklama girecekseniz lütfen 45 karakteri geçmeyiniz.")
@@ -65,7 +74,9 @@ class MenuModel(AbstractModel):
     
     page = models.OneToOneField(PageModel, on_delete=models.CASCADE, related_name="menuItem" ,verbose_name="Bağlı Olduğu Sayfa")
     
-    addFooter = models.BooleanField(default=False, verbose_name="Footer'e Ekle", help_text="Sayfanın footer kısmında menüyü göstermek isterseniz tik koyunuz istemezseniz ellemeyiniz.")
+    addFooter = models.BooleanField(default=False, verbose_name="Footer'e Ekle", help_text="Sayfanın footer kısmında menüyü göstermek kutuyu işaretleyiniz.")
+    
+    isActive = models.BooleanField(default=False, verbose_name="Aktif", help_text="Menüyü göstermek isterseniz kutuyu işaretleyiniz.")
     
     class Meta:
         verbose_name = "Menü Ayarı"
@@ -197,7 +208,12 @@ class CarsModel(AbstractModel):
     name = models.CharField(verbose_name="Araç Adı", max_length=100, help_text="Aracın Marka ve Modelini Giriniz.")
     
     image = models.FileField(upload_to="images", verbose_name="Araç Resmi", help_text="Aracın Resmini Ekleyiniz.")
-
+    
+    power = models.CharField(verbose_name="Beygir Gücü", max_length=100, help_text="Aracın beygir gücünü giriniz. (Örnek: 780 CV (574 kW) 8.500 rpm)")
+    
+    maxSpeed = models.CharField(verbose_name="Maksimum Hız", max_length=100, help_text="Aracın maksimum hızını giriniz. (Örnek: 355 KM/H)")
+    
+    accelerationTime = models.FloatField(verbose_name="Hızlanma Süresi", validators=[MinValueValidator(0.1), MaxValueValidator(60.0)], help_text="Aracın 0-100 arası hızlanma süresini (saniye cinsinden) giriniz. Not: En düşük 0.1 en fazla 60 saniye seçebilirsiniz.", default=0.1)
 
 class ContactModel(AbstractModel):
     email = models.EmailField(verbose_name="E Posta Adresi")

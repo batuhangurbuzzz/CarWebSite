@@ -1,0 +1,231 @@
+<!--begin::Sidebar-->
+        <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+            <!--begin::Sidebar Brand-->
+            <div class="sidebar-brand">
+            <!--begin::Brand Link-->
+            <a href="{% url 'index' %}" class="brand-link">
+                <!--begin::Brand Text-->
+                <span class="brand-text fw-light">Katman Panel</span>
+                <!--end::Brand Text-->
+            </a>
+            <!--end::Brand Link-->
+            </div>
+            <!--end::Sidebar Brand-->
+            <!--begin::Sidebar Wrapper-->
+            <div class="sidebar-wrapper">
+            <nav class="mt-2">
+                <!--begin::Sidebar Menu-->
+                <ul
+                class="nav sidebar-menu flex-column"
+                data-lte-toggle="treeview"
+                role="menu"
+                data-accordion="false"
+                >
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-ev-front"></i>
+                            <p>
+                                Araçlar
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'carsList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'carsCreate' %}" class="nav-link">
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p>Ekle</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-pencil-square"></i>
+                            <p>
+                                Bloglar
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'blogList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'blogCreate' %}" class="nav-link">
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p>Ekle</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-gear"></i>
+                            <p>
+                                Genel Ayarlar
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'generalSettingsList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'generalSettingsCreate' %}" class="nav-link">
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p>Ekle</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-envelope"></i>
+                            <p>
+                                İletişim
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'contactList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-menu-down"></i>
+                            <p>
+                                Menüler
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'menuList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'menuCreate' %}" class="nav-link">
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p>Ekle</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-file-break"></i>
+                            <p>
+                                Sayfalar
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'pageList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'pageCreate' %}" class="nav-link">
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p>Ekle</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-filetype-html"></i>
+                            <p>
+                                Sayfa Tipi
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'pageTypeList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'pageTypeCreate' %}" class="nav-link">
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p>Ekle</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-strava"></i>
+                            <p>
+                                Sosyal Medyalar
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'socialMediaList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'socialMediaCreate' %}" class="nav-link">
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p>Ekle</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="bi bi-card-image"></i>
+                            <p>
+                                Sliderlar
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'sliderList' %}" class="nav-link">
+                                    <i class="bi bi-list-task"></i>
+                                    <p>Listele</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'sliderCreate' %}" class="nav-link">
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p>Ekle</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!--end::Sidebar Menu-->
+            </nav>
+            </div>
+            <!--end::Sidebar Wrapper-->
+        </aside>
+        <!--end::Sidebar-->
